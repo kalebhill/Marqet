@@ -22,7 +22,7 @@ from sys import argv
 import re
 import operator
 
-script, input_file = argv
+# script, input_file = argv
 
 new_file = input("What would you like to name the output file? ")
 new_file = new_file + '.txt'

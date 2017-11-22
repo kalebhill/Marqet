@@ -29,15 +29,20 @@ def to_txt():
 ## to enable file input at run using argv
 # script, input_file = argv
 
-## to enable output to new output file
-target = open('output_test.txt', 'w')
+
+
+# ## to enable output to new output file
+# function = input("""What would you like to do?
+#                  - Parse a .csv
+#                  -
+#                 """)
 
 
 # defining init lists and dictionaries
 tech_list = []
 t_list2 = []
 tech_dict = {}
-
+target = open('output_test.txt', 'w')
 
 # opening the .csv file (currently hardcoded)
 with open('banking_sample_large.csv') as csvfile:
@@ -109,8 +114,8 @@ output_sorted = sorted(output_dict.items(), key=operator.itemgetter(1), reverse=
 for t in output_sorted:
     print(t)
 print("\n" + str(total_items) + " total items in the list")
-# target.write(str(tech_dict.items()))
-# target.close()
+
+
 
 print(tech_dict)
 print(t_list2)
