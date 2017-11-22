@@ -30,7 +30,7 @@ def to_txt():
 # script, input_file = argv
 
 ## to enable output to new output file
-# target = open('output_test.txt', 'w')
+target = open('output_test.txt', 'w')
 
 
 # defining init lists and dictionaries
@@ -40,7 +40,7 @@ tech_dict = {}
 
 
 # opening the .csv file (currently hardcoded)
-with open('sample.csv') as csvfile:
+with open('banking_sample_large.csv') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=',')
     for row in reader:
         items = list(row.items())
@@ -48,6 +48,7 @@ with open('sample.csv') as csvfile:
 
 # print(tech_list)
 
+# convert items in tech_list to tech_dict in format {key : [value1, value2, ...]}
 for item in tech_list:
     for key, value in item:
         if key not in tech_dict.keys():
@@ -57,10 +58,6 @@ for item in tech_list:
             if value not in tech_dict[key]:
                 tech_dict[key].append(value)
 
-
-
-
-
         # if key in tech_dict.keys():
         #     if value not in tech_dict[key].values():
         #         tech_dict[key] = {value : 0}
@@ -68,14 +65,23 @@ for item in tech_list:
         #         continue
 
 
-
+# convert tech_dict key into items
 for entry in tech_dict.items():
+    # skip the column if it contains the word 'company'?
+    if "company" in entry[0].lower():
+        continue
+
+
     for item in entry[1]:
+        # if "," in the entry[1] (which should be list of technologies)
         if "," in item:
+            # split each item at the ','
             item = item.split(',')
+            # strip the left space from each word & append to t_list2
             for word in item:
                 word = word.strip()
                 t_list2.append(word)
+        # if there is a single item in the list, append it (because there would be no ',', right?)
         else:
             t_list2.append(item)
 
@@ -107,8 +113,13 @@ print("\n" + str(total_items) + " total items in the list")
 # target.close()
 
 print(tech_dict)
+print(t_list2)
 
+for item, count in output_sorted:
+    target.write(str(item) + ": " + str(count) + "\n")
 
+target.close()
+print("Print Completed")
 
 
 
