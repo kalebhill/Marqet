@@ -7,7 +7,7 @@ function = input("""Please select the function you would like to perform
 1) Parse a .csv
 2) Rank potential opportunies
 ------------------------------------------------------
->""")
+> """)
 
 # functions
 
@@ -44,6 +44,35 @@ def get_col_titles(i_dict, o_col_list):
         else:
             o_col_list.append(title)
 
+def count_all(i_dict, o_list, o_dict):
+    for entry in i_dict.items():
+        if "company" in entry[0].lower():
+            continue
+
+        for item in entry[1]:
+            if "," in item:
+                item = item.split(',')
+                for word in item:
+                    word = word.strip()
+                    o_list.append(word)
+            else:
+                o_list.append(item)
+
+    for item in o_list:
+        if item == '':
+            continue
+
+        if item not in o_dict.keys():
+            o_dict[item] = 1
+        else:
+            o_dict[item] += 1
+
+    return o_dict
+
+
+
+
+
 
 
  # Branch to parse a .csv
@@ -68,11 +97,35 @@ while True:
 
         print("Detected the following columns -- which would you like to parse?")
         print("Type 'all' if you would like to parse all columns...")
-        
+
         for col_title in col_list:
             print(col_title)
         col_choice = input("> ")
-        print("Parsing " + col_choice + "...")
+
+
+
+
+        if col_choice.lower() == 'all':
+            col_choice = []
+            col_choice_dict = {}
+
+            print("Parsing all columns..." )
+            count_all(tech_dict, col_choice, col_choice_dict)
+
+            all_sorted = sorted(col_choice_dict.items(),
+            key=operator.itemgetter(1), reverse=True)
+
+            o_file = input("What would you like to name the output file?\n> ")
+            o_file = o_file + ".txt"
+            target = open(o_file, 'w')
+            target.write("**ALL TECHNOLOGIES**\n\n")
+
+            for item, count in all_sorted:
+                target.write(str(item) + ": " + str(count) + "\n")
+
+            target.close()
+
+            print("Sort complete!")
 
         break
     elif int(function) == 2:
