@@ -12,6 +12,8 @@ function = input("""Please select the function you would like to perform
 # functions
 
 def get_csv():
+    """ PROMPT USER FOR INPUT, CHECK TO SEE IF IT HAS A .CSV EXTENSION, AND IF
+    IT DOES, ACCEPT THE INPUT """
     while True:
         input_f = input("Enter the .csv file you would like to parse\n> ")
         # maybe use [-4:0] == '.csv' to make sure .csv is the extension
@@ -68,6 +70,31 @@ def count_all(i_dict, o_list, o_dict):
             o_dict[item] += 1
 
     return o_dict
+
+def count_col(i_dict, col_name, o_list, o_dict):
+    if col_name in i_dict.keys():
+        for item in col_name[1]:
+            if "," in item:
+                item = item.split(',')
+                for word in item:
+                    word = word.strip()
+                    o_list.append(word)
+            else:
+                o_list.append(item)
+
+    for item in o_list:
+        if item == '':
+            continue
+
+        if item not in o_dict.keys():
+            o_dict[item] = 1
+        else:
+            o_dict[item] += 1
+
+    return o_dict
+
+
+    pass
 
 
 
@@ -126,6 +153,39 @@ while True:
             target.close()
 
             print("Sort complete!")
+
+        if col_choice.title() in tech_dict.keys():
+            col_list = []
+            col_dict = {}
+
+            for items in tech_dict[col_choice.title()]:
+                if "," in items:
+                    items = items.split(',')
+
+                col_list.append(items)
+                if items == '':
+                    continue
+
+                for item in items:
+                    if item not in col_dict:
+                        item = item.strip()
+                        col_dict[item] = 1
+                    else:
+                        col_dict[item] += 1
+
+            col_dict = sorted(col_dict.items(), key=operator.itemgetter(1),
+            reverse=True)
+
+            o_file = input("What would you like to name the output file?\n> ")
+            o_file = o_file + ".txt"
+            target = open(o_file, 'w')
+            target.write("**" + col_choice.title() + "**\n\n")
+
+            for tech, count in col_dict:
+                target.write(str(tech) + ": " + str(count) + "\n")
+
+            target.close()
+            print("Completed!")
 
         break
     elif int(function) == 2:
