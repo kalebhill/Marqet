@@ -1,0 +1,76 @@
+**Mobility**
+
+B: 1
+l: 1
+a: 1
+c: 1
+k: 1
+e: 1
+r: 1
+y: 1
+Apple iPad: 1
+Apple iPhone: 1
+C: 1
+i: 1
+M: 1
+: 1
+o: 1
+b: 1
+S: 1
+u: 1
+t: 1
+n: 1
+s: 1
+AirWatch: 1
+Blackberry Enterprise Server (BES): 1
+BlackBerry: 1
+Citrix XenMobile (Zenprise): 1
+Good Mobile: 1
+Kony Mobile Application Platform: 1
+Android Devices: 1
+Android OS: 1
+jQuery Mobile: 1
+MobileIron Mobile Device Management: 1
+F: 1
+v: 1
+A: 1
+W: 1
+h: 1
+G: 1
+d: 1
+Symantec Mobile Management Suite: 1
+MOBI: 1
+ClairMail Mobile Solutions: 1
+BlackBerry PlayBook: 1
+IBM MaaS360: 1
+Good Mobile Device Management (MDM): 1
+Antenna Mobile: 1
+I: 1
+D: 1
+g: 1
+m: 1
+Good Mobile Control: 1
+Good Mobile Messaging: 1
+Yext: 1
+E: 1
+p: 1
+(: 1
+): 1
+P: 1
+3: 1
+6: 1
+0: 1
+Microsoft Windows Mobile OS: 1
+j: 1
+Q: 1
+K: 1
+f: 1
+Perfecto Mobile: 1
+x: 1
+X: 1
+Z: 1
+Y: 1
+Good Mobile Access: 1
+z: 1
+w: 1
+O: 1

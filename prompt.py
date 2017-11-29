@@ -162,9 +162,16 @@ while True:
                 if "," in items:
                     items = items.split(',')
 
-                col_list.append(items)
-                if items == '':
-                    continue
+
+                for item in items:
+                    if item == '':
+                        continue
+                    else:
+                        col_list.append(item)
+
+                for item in col_list:
+                    print(item)
+
 
                 for item in items:
                     if item not in col_dict:
@@ -175,6 +182,8 @@ while True:
 
             col_dict = sorted(col_dict.items(), key=operator.itemgetter(1),
             reverse=True)
+
+            # print(col_dict)
 
             o_file = input("What would you like to name the output file?\n> ")
             o_file = o_file + ".txt"
