@@ -163,17 +163,13 @@ while True:
                     items = items.split(',')
 
 
-                for item in items:
-                    if item == '':
-                        continue
-                    else:
-                        col_list.append(item)
+                    for item in items:
+                        if item == '' or item == ' ':
+                            continue
+                        else:
+                            col_list.append(item)
 
                 for item in col_list:
-                    print(item)
-
-
-                for item in items:
                     if item not in col_dict:
                         item = item.strip()
                         col_dict[item] = 1
