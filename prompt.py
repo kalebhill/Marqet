@@ -17,7 +17,10 @@ def get_csv():
     while True:
         input_f = input("Enter the .csv file you would like to parse\n> ")
         # maybe use [-4:0] == '.csv' to make sure .csv is the extension
-        if ".csv" in input_f:
+        ## debug option
+        if input_f == '':
+            return 'banking_sample_large.csv'
+        elif ".csv" in input_f:
             return input_f
         else:
             print("Please enter a file with a .csv extension\n")
@@ -71,30 +74,32 @@ def count_all(i_dict, o_list, o_dict):
 
     return o_dict
 
-def count_col(i_dict, col_name, o_list, o_dict):
-    if col_name in i_dict.keys():
-        for item in col_name[1]:
-            if "," in item:
-                item = item.split(',')
-                for word in item:
-                    word = word.strip()
-                    o_list.append(word)
+def sort_col(col_choice, i_dict, o_dict):
+    col_list = []
+    col_dict = {}
+
+    for items in i_dict[col_choice.title()]:
+        if "," in items:
+            items = items.split(',')
+
+            for item in items:
+                if item == '' or item == ' ':
+                    continue
             else:
-                o_list.append(item)
+                col_list.append(item)
 
-    for item in o_list:
-        if item == '':
-            continue
+        for item in col_list:
+            if item not in o_dict:
+                item = item.strip()
+                o_dict[item] = 1
+            else:
+                o_dict[item] += 1
 
-        if item not in o_dict.keys():
-            o_dict[item] = 1
-        else:
-            o_dict[item] += 1
+    o_dict = sorted(o_dict.items(), key=operator.itemgetter(1), reverse=True)
 
     return o_dict
 
 
-    pass
 
 
 
@@ -133,13 +138,13 @@ while True:
 
 
         if col_choice.lower() == 'all':
-            col_choice = []
-            col_choice_dict = {}
+            all_cols = []
+            all_cols_dict = {}
 
             print("Parsing all columns..." )
-            count_all(tech_dict, col_choice, col_choice_dict)
+            count_all(tech_dict, all_cols, all_cols_dict)
 
-            all_sorted = sorted(col_choice_dict.items(),
+            all_cols_sorted = sorted(all_cols_dict.items(),
             key=operator.itemgetter(1), reverse=True)
 
             o_file = input("What would you like to name the output file?\n> ")
@@ -147,7 +152,7 @@ while True:
             target = open(o_file, 'w')
             target.write("**ALL TECHNOLOGIES**\n\n")
 
-            for item, count in all_sorted:
+            for item, count in all_cols_sorted:
                 target.write(str(item) + ": " + str(count) + "\n")
 
             target.close()
@@ -179,7 +184,7 @@ while True:
             col_dict = sorted(col_dict.items(), key=operator.itemgetter(1),
             reverse=True)
 
-            # print(col_dict)
+            print(col_dict)
 
             o_file = input("What would you like to name the output file?\n> ")
             o_file = o_file + ".txt"

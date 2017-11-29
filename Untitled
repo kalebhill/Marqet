@@ -1,0 +1,24 @@
+def sort_col(col_choice, i_dict, o_dict):
+    col_list = []
+    col_dict = {}
+
+    for items in i_dict[col_choice.title()]:
+        if "," in items:
+            items = items.split(',')
+
+            for item in items:
+                if item == '' or item == ' ':
+                    continue
+            else:
+                col_list.append(item)
+
+        for item in col_list:
+            if item not in o_dict:
+                item = item.strip()
+                o_dict[item] = 1
+            else:
+                o_dict[item] += 1
+
+    o_dict = sorted(o_dict.items(), key=operator.itemgetter(1), reverse=True)
+
+    return o_dict
